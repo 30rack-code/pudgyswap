@@ -1,0 +1,357 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;\f1\fnil\fcharset0 .AppleSystemUIFontMonospaced-RegularItalic;}
+{\colortbl;\red255\green255\blue255;\red155\green162\blue177;\red36\green36\blue35;\red214\green85\blue98;
+\red197\green136\blue83;\red136\green185\blue102;\red184\green93\blue213;\red81\green157\blue235;\red74\green80\blue93;
+}
+{\*\expandedcolortbl;;\cssrgb\c67059\c69804\c74902;\cssrgb\c18824\c18824\c18039;\cssrgb\c87843\c42353\c45882;
+\cssrgb\c81961\c60392\c40000;\cssrgb\c59608\c76471\c47451;\cssrgb\c77647\c47059\c86667;\cssrgb\c38039\c68627\c93725;\cssrgb\c36078\c38824\c43922;
+}
+\margl1440\margr1440\vieww30040\viewh16480\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 <!DOCTYPE html>\
+<\cf4 \strokec4 html \cf5 \strokec5 lang\cf2 \strokec2 ="\cf6 \strokec6 en\cf2 \strokec2 ">\
+<\cf4 \strokec4 head\cf2 \strokec2 >\
+    <\cf4 \strokec4 meta \cf5 \strokec5 charset\cf2 \strokec2 ="\cf6 \strokec6 UTF-8\cf2 \strokec2 ">\
+    <\cf4 \strokec4 meta \cf5 \strokec5 name\cf2 \strokec2 ="\cf6 \strokec6 viewport\cf2 \strokec2 "\cf4 \strokec4  \cf5 \strokec5 content\cf2 \strokec2 ="\cf6 \strokec6 width=device-width, initial-scale=1.0\cf2 \strokec2 ">\
+    <\cf4 \strokec4 title\cf2 \strokec2 >PudgySwap - NFT Trading Platform</\cf4 \strokec4 title\cf2 \strokec2 >\
+    <\cf4 \strokec4 script \cf5 \strokec5 crossorigin\cf4 \strokec4  \cf5 \strokec5 src\cf2 \strokec2 ="\cf6 \strokec6 https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js\cf2 \strokec2 "></\cf4 \strokec4 script\cf2 \strokec2 >\
+    <\cf4 \strokec4 script \cf5 \strokec5 crossorigin\cf4 \strokec4  \cf5 \strokec5 src\cf2 \strokec2 ="\cf6 \strokec6 https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js\cf2 \strokec2 "></\cf4 \strokec4 script\cf2 \strokec2 >\
+    <\cf4 \strokec4 script \cf5 \strokec5 src\cf2 \strokec2 ="\cf6 \strokec6 https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js\cf2 \strokec2 "></\cf4 \strokec4 script\cf2 \strokec2 >\
+    <\cf4 \strokec4 script \cf5 \strokec5 src\cf2 \strokec2 ="\cf6 \strokec6 https://cdn.tailwindcss.com\cf2 \strokec2 "></\cf4 \strokec4 script\cf2 \strokec2 >\
+</\cf4 \strokec4 head\cf2 \strokec2 >\
+<\cf4 \strokec4 body\cf2 \strokec2 >\
+    <\cf4 \strokec4 div \cf5 \strokec5 id\cf2 \strokec2 ="\cf6 \strokec6 root\cf2 \strokec2 "></\cf4 \strokec4 div\cf2 \strokec2 >\
+\
+    <\cf4 \strokec4 script \cf5 \strokec5 type\cf2 \strokec2 ="\cf6 \strokec6 text/babel\cf2 \strokec2 ">\
+        \cf7 \strokec7 const\cf2 \strokec2  \{ useState, useEffect \} \cf8 \strokec8 =\cf2 \strokec2  React;\
+\
+        
+\f1\i \cf9 \strokec9 // Lucide icons as SVG components
+\f0\i0 \cf2 \strokec2 \
+        \cf7 \strokec7 const\cf2 \strokec2  Wallet \cf8 \strokec8 =\cf2 \strokec2  (\{ size \cf8 \strokec8 =\cf2 \strokec2  \cf5 \strokec5 24\cf2 \strokec2 , className \cf8 \strokec8 =\cf2 \strokec2  \cf6 \strokec6 ""\cf2 \strokec2  \}) \cf8 \strokec8 =>\cf2 \strokec2  (\
+            \cf8 \strokec8 <\cf2 \strokec2 svg width\cf8 \strokec8 =\cf2 \strokec2 \{size\} height\cf8 \strokec8 =\cf2 \strokec2 \{size\} viewBox\cf8 \strokec8 =\cf6 \strokec6 "0 0 24 24"\cf2 \strokec2  fill\cf8 \strokec8 =\cf6 \strokec6 "none"\cf2 \strokec2  stroke\cf8 \strokec8 =\cf6 \strokec6 "currentColor"\cf2 \strokec2  strokeWidth\cf8 \strokec8 =\cf6 \strokec6 "2"\cf2 \strokec2  className\cf8 \strokec8 =\cf2 \strokec2 \{className\}\cf8 \strokec8 >\cf2 \strokec2 \
+                \cf8 \strokec8 <\cf2 \strokec2 path d\cf8 \strokec8 =\cf6 \strokec6 "M21 12V7H5a2 2 0 0 1 0-4h14v4"\cf8 \strokec8 />\cf2 \strokec2 \
+                \cf8 \strokec8 <\cf2 \strokec2 path d\cf8 \strokec8 =\cf6 \strokec6 "M3 5v14a2 2 0 0 0 2 2h16v-5"\cf8 \strokec8 />\cf2 \strokec2 \
+                \cf8 \strokec8 <\cf2 \strokec2 path d\cf8 \strokec8 =\cf6 \strokec6 "M18 12a2 2 0 0 0 0 4h4v-4Z"\cf8 \strokec8 />\cf2 \strokec2 \
+            \cf8 \strokec8 </\cf2 \strokec2 svg\cf8 \strokec8 >\cf2 \strokec2 \
+        );\
+\
+        \cf7 \strokec7 const\cf2 \strokec2  ArrowRightLeft \cf8 \strokec8 =\cf2 \strokec2  (\{ size \cf8 \strokec8 =\cf2 \strokec2  \cf5 \strokec5 24\cf2 \strokec2 , className \cf8 \strokec8 =\cf2 \strokec2  \cf6 \strokec6 ""\cf2 \strokec2  \}) \cf8 \strokec8 =>\cf2 \strokec2  (\
+            \cf8 \strokec8 <\cf2 \strokec2 svg width\cf8 \strokec8 =\cf2 \strokec2 \{size\} height\cf8 \strokec8 =\cf2 \strokec2 \{size\} viewBox\cf8 \strokec8 =\cf6 \strokec6 "0 0 24 24"\cf2 \strokec2  fill\cf8 \strokec8 =\cf6 \strokec6 "none"\cf2 \strokec2  stroke\cf8 \strokec8 =\cf6 \strokec6 "currentColor"\cf2 \strokec2  strokeWidth\cf8 \strokec8 =\cf6 \strokec6 "2"\cf2 \strokec2  className\cf8 \strokec8 =\cf2 \strokec2 \{className\}\cf8 \strokec8 >\cf2 \strokec2 \
+                \cf8 \strokec8 <\cf2 \strokec2 path d\cf8 \strokec8 =\cf6 \strokec6 "M8 3 4 7l4 4"\cf8 \strokec8 />\cf2 \strokec2 \
+                \cf8 \strokec8 <\cf2 \strokec2 path d\cf8 \strokec8 =\cf6 \strokec6 "M4 7h16"\cf8 \strokec8 />\cf2 \strokec2 \
+                \cf8 \strokec8 <\cf2 \strokec2 path d\cf8 \strokec8 =\cf6 \strokec6 "m16 21 4-4-4-4"\cf8 \strokec8 />\cf2 \strokec2 \
+                \cf8 \strokec8 <\cf2 \strokec2 path d\cf8 \strokec8 =\cf6 \strokec6 "M20 17H4"\cf8 \strokec8 />\cf2 \strokec2 \
+            \cf8 \strokec8 </\cf2 \strokec2 svg\cf8 \strokec8 >\cf2 \strokec2 \
+        );\
+\
+        \cf7 \strokec7 const\cf2 \strokec2  \cf8 \strokec8 PudgySwap\cf2 \strokec2  \cf8 \strokec8 =\cf2 \strokec2  () \cf8 \strokec8 =>\cf2 \strokec2  \{\
+            \cf7 \strokec7 const\cf2 \strokec2  [walletConnected, setWalletConnected] \cf8 \strokec8 =\cf2 \strokec2  \cf8 \strokec8 useState\cf2 \strokec2 (\cf5 \strokec5 false\cf2 \strokec2 );\
+            \cf7 \strokec7 const\cf2 \strokec2  [walletAddress, setWalletAddress] \cf8 \strokec8 =\cf2 \strokec2  \cf8 \strokec8 useState\cf2 \strokec2 (\cf6 \strokec6 ''\cf2 \strokec2 );\
+            \cf7 \strokec7 const\cf2 \strokec2  [activeTab, setActiveTab] \cf8 \strokec8 =\cf2 \strokec2  \cf8 \strokec8 useState\cf2 \strokec2 (\cf6 \strokec6 'swap'\cf2 \strokec2 );\
+            \cf7 \strokec7 const\cf2 \strokec2  [pudgyData, setPudgyData] \cf8 \strokec8 =\cf2 \strokec2  \cf8 \strokec8 useState\cf2 \strokec2 (\cf7 \strokec7 null\cf2 \strokec2 );\
+            \cf7 \strokec7 const\cf2 \strokec2  [lilPudgyData, setLilPudgyData] \cf8 \strokec8 =\cf2 \strokec2  \cf8 \strokec8 useState\cf2 \strokec2 (\cf7 \strokec7 null\cf2 \strokec2 );\
+            \cf7 \strokec7 const\cf2 \strokec2  [listings, setListings] \cf8 \strokec8 =\cf2 \strokec2  \cf8 \strokec8 useState\cf2 \strokec2 ([]);\
+            \cf7 \strokec7 const\cf2 \strokec2  [myNFTs, setMyNFTs] \cf8 \strokec8 =\cf2 \strokec2  \cf8 \strokec8 useState\cf2 \strokec2 ([]);\
+            \cf7 \strokec7 const\cf2 \strokec2  [selectedNFT, setSelectedNFT] \cf8 \strokec8 =\cf2 \strokec2  \cf8 \strokec8 useState\cf2 \strokec2 (\cf7 \strokec7 null\cf2 \strokec2 );\
+\
+            \cf7 \strokec7 const\cf2 \strokec2  mockListings \cf8 \strokec8 =\cf2 \strokec2  [\
+                \{ \cf4 \strokec4 id\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 1\cf2 \strokec2 , \cf4 \strokec4 tokenId\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '#1234'\cf2 \strokec2 , \cf4 \strokec4 collection\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Pudgy Penguins'\cf2 \strokec2 , \cf4 \strokec4 owner\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '0x1234...5678'\cf2 \strokec2 , \cf4 \strokec4 image\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '\uc0\u55357 \u56359 '\cf2 \strokec2 , \cf4 \strokec4 trait\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Blue Scarf'\cf2 \strokec2 , \cf4 \strokec4 rarity\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Rare'\cf2 \strokec2  \},\
+                \{ \cf4 \strokec4 id\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 2\cf2 \strokec2 , \cf4 \strokec4 tokenId\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '#5678'\cf2 \strokec2 , \cf4 \strokec4 collection\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Pudgy Penguins'\cf2 \strokec2 , \cf4 \strokec4 owner\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '0x8765...4321'\cf2 \strokec2 , \cf4 \strokec4 image\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '\uc0\u55357 \u56359 '\cf2 \strokec2 , \cf4 \strokec4 trait\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Red Hat'\cf2 \strokec2 , \cf4 \strokec4 rarity\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Common'\cf2 \strokec2  \},\
+                \{ \cf4 \strokec4 id\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 3\cf2 \strokec2 , \cf4 \strokec4 tokenId\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '#9012'\cf2 \strokec2 , \cf4 \strokec4 collection\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Lil Pudgys'\cf2 \strokec2 , \cf4 \strokec4 owner\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '0x9876...1234'\cf2 \strokec2 , \cf4 \strokec4 image\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '\uc0\u55357 \u56359 '\cf2 \strokec2 , \cf4 \strokec4 trait\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Yellow Bow'\cf2 \strokec2 , \cf4 \strokec4 rarity\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Epic'\cf2 \strokec2  \},\
+                \{ \cf4 \strokec4 id\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 4\cf2 \strokec2 , \cf4 \strokec4 tokenId\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '#3456'\cf2 \strokec2 , \cf4 \strokec4 collection\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Lil Pudgys'\cf2 \strokec2 , \cf4 \strokec4 owner\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '0x4567...8901'\cf2 \strokec2 , \cf4 \strokec4 image\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '\uc0\u55357 \u56359 '\cf2 \strokec2 , \cf4 \strokec4 trait\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Green Glasses'\cf2 \strokec2 , \cf4 \strokec4 rarity\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Rare'\cf2 \strokec2  \},\
+                \{ \cf4 \strokec4 id\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 5\cf2 \strokec2 , \cf4 \strokec4 tokenId\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '#7890'\cf2 \strokec2 , \cf4 \strokec4 collection\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Pudgy Penguins'\cf2 \strokec2 , \cf4 \strokec4 owner\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '0x2345...6789'\cf2 \strokec2 , \cf4 \strokec4 image\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '\uc0\u55357 \u56359 '\cf2 \strokec2 , \cf4 \strokec4 trait\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Pink Bow'\cf2 \strokec2 , \cf4 \strokec4 rarity\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Epic'\cf2 \strokec2  \},\
+                \{ \cf4 \strokec4 id\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 6\cf2 \strokec2 , \cf4 \strokec4 tokenId\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '#2468'\cf2 \strokec2 , \cf4 \strokec4 collection\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Lil Pudgys'\cf2 \strokec2 , \cf4 \strokec4 owner\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '0x6789...0123'\cf2 \strokec2 , \cf4 \strokec4 image\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '\uc0\u55357 \u56359 '\cf2 \strokec2 , \cf4 \strokec4 trait\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Blue Hat'\cf2 \strokec2 , \cf4 \strokec4 rarity\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Common'\cf2 \strokec2  \},\
+            ];\
+\
+            \cf7 \strokec7 const\cf2 \strokec2  mockMyNFTs \cf8 \strokec8 =\cf2 \strokec2  [\
+                \{ \cf4 \strokec4 id\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 1\cf2 \strokec2 , \cf4 \strokec4 tokenId\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '#2468'\cf2 \strokec2 , \cf4 \strokec4 collection\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Pudgy Penguins'\cf2 \strokec2 , \cf4 \strokec4 image\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '\uc0\u55357 \u56359 '\cf2 \strokec2 , \cf4 \strokec4 trait\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Purple Scarf'\cf2 \strokec2 , \cf4 \strokec4 rarity\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Epic'\cf2 \strokec2  \},\
+                \{ \cf4 \strokec4 id\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 2\cf2 \strokec2 , \cf4 \strokec4 tokenId\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '#1357'\cf2 \strokec2 , \cf4 \strokec4 collection\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Lil Pudgys'\cf2 \strokec2 , \cf4 \strokec4 image\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 '\uc0\u55357 \u56359 '\cf2 \strokec2 , \cf4 \strokec4 trait\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Orange Hat'\cf2 \strokec2 , \cf4 \strokec4 rarity\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'Rare'\cf2 \strokec2  \},\
+            ];\
+\
+            \cf8 \strokec8 useEffect\cf2 \strokec2 (() \cf8 \strokec8 =>\cf2 \strokec2  \{\
+                \cf8 \strokec8 setListings\cf2 \strokec2 (mockListings);\
+                \cf8 \strokec8 fetchMarketData\cf2 \strokec2 ();\
+            \}, []);\
+\
+            \cf7 \strokec7 const\cf2 \strokec2  \cf8 \strokec8 fetchMarketData\cf2 \strokec2  \cf8 \strokec8 =\cf2 \strokec2  \cf7 \strokec7 async\cf2 \strokec2  () \cf8 \strokec8 =>\cf2 \strokec2  \{\
+                \cf8 \strokec8 setPudgyData\cf2 \strokec2 (\{\
+                    \cf4 \strokec4 floorPrice\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 8.45\cf2 \strokec2 ,\
+                    \cf4 \strokec4 floorPriceUSD\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 29575\cf2 \strokec2 ,\
+                    \cf4 \strokec4 volume24h\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 234.5\cf2 \strokec2 ,\
+                    \cf4 \strokec4 sales24h\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 28\cf2 \strokec2 ,\
+                    \cf4 \strokec4 priceChange24h\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 2.3\cf2 \strokec2 \
+                \});\
+                \
+                \cf8 \strokec8 setLilPudgyData\cf2 \strokec2 (\{\
+                    \cf4 \strokec4 floorPrice\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 2.15\cf2 \strokec2 ,\
+                    \cf4 \strokec4 floorPriceUSD\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 7525\cf2 \strokec2 ,\
+                    \cf4 \strokec4 volume24h\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 89.2\cf2 \strokec2 ,\
+                    \cf4 \strokec4 sales24h\cf8 \strokec8 :\cf2 \strokec2  \cf5 \strokec5 42\cf2 \strokec2 ,\
+                    \cf4 \strokec4 priceChange24h\cf8 \strokec8 :\cf2 \strokec2  \cf8 \strokec8 -\cf5 \strokec5 1.5\cf2 \strokec2 \
+                \});\
+            \};\
+\
+            \cf7 \strokec7 const\cf2 \strokec2  \cf8 \strokec8 connectWallet\cf2 \strokec2  \cf8 \strokec8 =\cf2 \strokec2  \cf7 \strokec7 async\cf2 \strokec2  () \cf8 \strokec8 =>\cf2 \strokec2  \{\
+                \cf7 \strokec7 if\cf2 \strokec2  (\cf7 \strokec7 typeof\cf2 \strokec2  \cf8 \strokec8 window\cf2 \strokec2 .ethereum \cf8 \strokec8 !==\cf2 \strokec2  \cf6 \strokec6 'undefined'\cf2 \strokec2 ) \{\
+                    \cf7 \strokec7 try\cf2 \strokec2  \{\
+                        \cf7 \strokec7 const\cf2 \strokec2  accounts \cf8 \strokec8 =\cf2 \strokec2  \cf7 \strokec7 await\cf2 \strokec2  \cf8 \strokec8 window\cf2 \strokec2 .ethereum.\cf8 \strokec8 request\cf2 \strokec2 (\{ \cf4 \strokec4 method\cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 'eth_requestAccounts'\cf2 \strokec2  \});\
+                        \cf8 \strokec8 setWalletAddress\cf2 \strokec2 (accounts[\cf5 \strokec5 0\cf2 \strokec2 ]);\
+                        \cf8 \strokec8 setWalletConnected\cf2 \strokec2 (\cf5 \strokec5 true\cf2 \strokec2 );\
+                        \cf8 \strokec8 setMyNFTs\cf2 \strokec2 (mockMyNFTs);\
+                    \} \cf7 \strokec7 catch\cf2 \strokec2  (error) \{\
+                        \cf5 \strokec5 console\cf2 \strokec2 .\cf8 \strokec8 error\cf2 \strokec2 (\cf6 \strokec6 'Failed to connect wallet:'\cf2 \strokec2 , error);\
+                        \cf7 \strokec7 const\cf2 \strokec2  mockAddress \cf8 \strokec8 =\cf2 \strokec2  \cf6 \strokec6 '0x'\cf2 \strokec2  \cf8 \strokec8 +\cf2 \strokec2  \cf5 \strokec5 Math\cf2 \strokec2 .\cf8 \strokec8 random\cf2 \strokec2 ().\cf8 \strokec8 toString\cf2 \strokec2 (\cf5 \strokec5 16\cf2 \strokec2 ).\cf8 \strokec8 substr\cf2 \strokec2 (\cf5 \strokec5 2\cf2 \strokec2 , \cf5 \strokec5 40\cf2 \strokec2 );\
+                        \cf8 \strokec8 setWalletAddress\cf2 \strokec2 (mockAddress);\
+                        \cf8 \strokec8 setWalletConnected\cf2 \strokec2 (\cf5 \strokec5 true\cf2 \strokec2 );\
+                        \cf8 \strokec8 setMyNFTs\cf2 \strokec2 (mockMyNFTs);\
+                    \}\
+                \} \cf7 \strokec7 else\cf2 \strokec2  \{\
+                    \cf7 \strokec7 const\cf2 \strokec2  mockAddress \cf8 \strokec8 =\cf2 \strokec2  \cf6 \strokec6 '0x'\cf2 \strokec2  \cf8 \strokec8 +\cf2 \strokec2  \cf5 \strokec5 Math\cf2 \strokec2 .\cf8 \strokec8 random\cf2 \strokec2 ().\cf8 \strokec8 toString\cf2 \strokec2 (\cf5 \strokec5 16\cf2 \strokec2 ).\cf8 \strokec8 substr\cf2 \strokec2 (\cf5 \strokec5 2\cf2 \strokec2 , \cf5 \strokec5 40\cf2 \strokec2 );\
+                    \cf8 \strokec8 setWalletAddress\cf2 \strokec2 (mockAddress);\
+                    \cf8 \strokec8 setWalletConnected\cf2 \strokec2 (\cf5 \strokec5 true\cf2 \strokec2 );\
+                    \cf8 \strokec8 setMyNFTs\cf2 \strokec2 (mockMyNFTs);\
+                \}\
+            \};\
+\
+            \cf7 \strokec7 const\cf2 \strokec2  \cf8 \strokec8 disconnectWallet\cf2 \strokec2  \cf8 \strokec8 =\cf2 \strokec2  () \cf8 \strokec8 =>\cf2 \strokec2  \{\
+                \cf8 \strokec8 setWalletConnected\cf2 \strokec2 (\cf5 \strokec5 false\cf2 \strokec2 );\
+                \cf8 \strokec8 setWalletAddress\cf2 \strokec2 (\cf6 \strokec6 ''\cf2 \strokec2 );\
+                \cf8 \strokec8 setMyNFTs\cf2 \strokec2 ([]);\
+                \cf8 \strokec8 setSelectedNFT\cf2 \strokec2 (\cf7 \strokec7 null\cf2 \strokec2 );\
+            \};\
+\
+            \cf7 \strokec7 const\cf2 \strokec2  \cf8 \strokec8 initiateSwap\cf2 \strokec2  \cf8 \strokec8 =\cf2 \strokec2  (listingNFT) \cf8 \strokec8 =>\cf2 \strokec2  \{\
+                \cf7 \strokec7 if\cf2 \strokec2  (\cf8 \strokec8 !\cf2 \strokec2 selectedNFT) \{\
+                    \cf8 \strokec8 alert\cf2 \strokec2 (\cf6 \strokec6 'Please select one of your NFTs to offer in the swap'\cf2 \strokec2 );\
+                    \cf7 \strokec7 return\cf2 \strokec2 ;\
+                \}\
+                \cf8 \strokec8 alert\cf2 \strokec2 (`\cf6 \strokec6 Swap initiated!\\nYour \cf2 \strokec2 $\{selectedNFT.collection\}\cf6 \strokec6  \cf2 \strokec2 $\{selectedNFT.tokenId\}\cf6 \strokec6 \\n\uc0\u8596 \\nTheir \cf2 \strokec2 $\{listingNFT.collection\}\cf6 \strokec6  \cf2 \strokec2 $\{listingNFT.tokenId\}\cf6 \strokec6 \\n\\nIn production, this would create a swap proposal on-chain.\cf2 \strokec2 `);\
+            \};\
+\
+            \cf7 \strokec7 const\cf2 \strokec2  \cf8 \strokec8 StatCard\cf2 \strokec2  \cf8 \strokec8 =\cf2 \strokec2  (\{ data, name, gradient \}) \cf8 \strokec8 =>\cf2 \strokec2  \{\
+                \cf7 \strokec7 if\cf2 \strokec2  (\cf8 \strokec8 !\cf2 \strokec2 data) \cf7 \strokec7 return\cf2 \strokec2  \cf7 \strokec7 null\cf2 \strokec2 ;\
+                \cf7 \strokec7 const\cf2 \strokec2  isPositive \cf8 \strokec8 =\cf2 \strokec2  data.priceChange24h \cf8 \strokec8 >=\cf2 \strokec2  \cf5 \strokec5 0\cf2 \strokec2 ;\
+                \
+                \cf7 \strokec7 return\cf2 \strokec2  (\
+                    \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf2 \strokec2 \{`\cf6 \strokec6 bg-gradient-to-br \cf2 \strokec2 $\{gradient\}\cf6 \strokec6  rounded-xl p-4 shadow-lg\cf2 \strokec2 `\}\cf8 \strokec8 >\cf2 \strokec2 \
+                        \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "bg-white/90 backdrop-blur rounded-lg p-4"\cf8 \strokec8 >\cf2 \strokec2 \
+                            \cf8 \strokec8 <\cf2 \strokec2 h3 className\cf8 \strokec8 =\cf6 \strokec6 "font-bold text-gray-800 mb-2"\cf8 \strokec8 >\cf2 \strokec2 \{name\}\cf8 \strokec8 </\cf2 \strokec2 h3\cf8 \strokec8 >\cf2 \strokec2 \
+                            \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "flex items-baseline gap-2 mb-1"\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 <\cf2 \strokec2 span className\cf8 \strokec8 =\cf6 \strokec6 "text-2xl font-bold text-gray-900"\cf8 \strokec8 >\cf2 \strokec2 \{data.floorPrice\} \cf5 \strokec5 ETH\cf8 \strokec8 </\cf2 \strokec2 span\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 <\cf2 \strokec2 span className\cf8 \strokec8 =\cf2 \strokec2 \{`\cf6 \strokec6 text-sm font-semibold \cf2 \strokec2 $\{isPositive ? 'text-green-600' : 'text-red-600'\}`\}\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \{isPositive \cf8 \strokec8 ?\cf2 \strokec2  \cf6 \strokec6 '+'\cf2 \strokec2  \cf8 \strokec8 :\cf2 \strokec2  \cf6 \strokec6 ''\cf2 \strokec2 \}\{data.priceChange24h\}\cf8 \strokec8 %\cf2 \strokec2 \
+                                \cf8 \strokec8 </\cf2 \strokec2 span\cf8 \strokec8 >\cf2 \strokec2 \
+                            \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                            \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "text-sm text-gray-600"\cf8 \strokec8 >\cf2 \strokec2 $\{data.floorPriceUSD.\cf8 \strokec8 toLocaleString\cf2 \strokec2 ()\}\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                            \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "flex gap-4 mt-3 text-xs"\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 <\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "text-gray-500"\cf8 \strokec8 >\cf2 \strokec2 24h Vol\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "font-semibold text-gray-800"\cf8 \strokec8 >\cf2 \strokec2 \{data.volume24h\} \cf5 \strokec5 ETH\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 <\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "text-gray-500"\cf8 \strokec8 >\cf2 \strokec2 24h Sales\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "font-semibold text-gray-800"\cf8 \strokec8 >\cf2 \strokec2 \{data.sales24h\}\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                            \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                        \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                    \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                );\
+            \};\
+\
+            \cf7 \strokec7 return\cf2 \strokec2  (\
+                \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"\cf8 \strokec8 >\cf2 \strokec2 \
+                    \cf8 \strokec8 <\cf2 \strokec2 header className\cf8 \strokec8 =\cf6 \strokec6 "border-b border-white/10 bg-black/20 backdrop-blur-lg"\cf8 \strokec8 >\cf2 \strokec2 \
+                        \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"\cf8 \strokec8 >\cf2 \strokec2 \
+                            \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "flex items-center gap-3"\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "text-4xl"\cf8 \strokec8 >\cf2 \strokec2 \uc0\u55357 \u56359 \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 <\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 <\cf2 \strokec2 h1 className\cf8 \strokec8 =\cf6 \strokec6 "text-2xl font-bold text-white"\cf8 \strokec8 >\cf2 \strokec2 PudgySwap\cf8 \strokec8 </\cf2 \strokec2 h1\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "text-xs text-purple-300"\cf8 \strokec8 >\cf2 \strokec2 Peer\cf8 \strokec8 -\cf2 \strokec2 to\cf8 \strokec8 -\cf2 \strokec2 peer \cf5 \strokec5 NFT\cf2 \strokec2  Trading\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                            \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                            \
+                            \{\cf8 \strokec8 !\cf2 \strokec2 walletConnected \cf8 \strokec8 ?\cf2 \strokec2  (\
+                                \cf8 \strokec8 <\cf2 \strokec2 button\
+                                    onClick\cf8 \strokec8 =\cf2 \strokec2 \{connectWallet\}\
+                                    className\cf8 \strokec8 =\cf6 \strokec6 "flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl"\cf2 \strokec2 \
+                                \cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 <\cf2 \strokec2 Wallet size\cf8 \strokec8 =\cf2 \strokec2 \{\cf5 \strokec5 20\cf2 \strokec2 \} \cf8 \strokec8 />\cf2 \strokec2 \
+                                    Connect Wallet\
+                                \cf8 \strokec8 </\cf2 \strokec2 button\cf8 \strokec8 >\cf2 \strokec2 \
+                            ) \cf8 \strokec8 :\cf2 \strokec2  (\
+                                \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "flex items-center gap-3"\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "bg-white/10 backdrop-blur px-4 py-2 rounded-lg"\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "text-xs text-purple-300"\cf8 \strokec8 >\cf2 \strokec2 Connected\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "text-sm text-white font-mono"\cf8 \strokec8 >\cf2 \strokec2 \{walletAddress.\cf8 \strokec8 slice\cf2 \strokec2 (\cf5 \strokec5 0\cf2 \strokec2 , \cf5 \strokec5 6\cf2 \strokec2 )\}\cf8 \strokec8 ...\cf2 \strokec2 \{walletAddress.\cf8 \strokec8 slice\cf2 \strokec2 (\cf8 \strokec8 -\cf5 \strokec5 4\cf2 \strokec2 )\}\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 <\cf2 \strokec2 button\
+                                        onClick\cf8 \strokec8 =\cf2 \strokec2 \{disconnectWallet\}\
+                                        className\cf8 \strokec8 =\cf6 \strokec6 "text-red-400 hover:text-red-300 text-sm"\cf2 \strokec2 \
+                                    \cf8 \strokec8 >\cf2 \strokec2 \
+                                        Disconnect\
+                                    \cf8 \strokec8 </\cf2 \strokec2 button\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                            )\}\
+                        \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                    \cf8 \strokec8 </\cf2 \strokec2 header\cf8 \strokec8 >\cf2 \strokec2 \
+\
+                    \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "max-w-7xl mx-auto px-6 py-8"\cf8 \strokec8 >\cf2 \strokec2 \
+                        \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "grid md:grid-cols-2 gap-4 mb-8"\cf8 \strokec8 >\cf2 \strokec2 \
+                            \cf8 \strokec8 <\cf2 \strokec2 StatCard data\cf8 \strokec8 =\cf2 \strokec2 \{pudgyData\} name\cf8 \strokec8 =\cf6 \strokec6 "Pudgy Penguins"\cf2 \strokec2  gradient\cf8 \strokec8 =\cf6 \strokec6 "from-blue-400 to-cyan-400"\cf2 \strokec2  \cf8 \strokec8 />\cf2 \strokec2 \
+                            \cf8 \strokec8 <\cf2 \strokec2 StatCard data\cf8 \strokec8 =\cf2 \strokec2 \{lilPudgyData\} name\cf8 \strokec8 =\cf6 \strokec6 "Lil Pudgys"\cf2 \strokec2  gradient\cf8 \strokec8 =\cf6 \strokec6 "from-purple-400 to-pink-400"\cf2 \strokec2  \cf8 \strokec8 />\cf2 \strokec2 \
+                        \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+\
+                        \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "flex gap-2 mb-6 bg-white/5 backdrop-blur rounded-lg p-1"\cf8 \strokec8 >\cf2 \strokec2 \
+                            \cf8 \strokec8 <\cf2 \strokec2 button\
+                                onClick\cf8 \strokec8 =\cf2 \strokec2 \{() \cf8 \strokec8 =>\cf2 \strokec2  \cf8 \strokec8 setActiveTab\cf2 \strokec2 (\cf6 \strokec6 'swap'\cf2 \strokec2 )\}\
+                                className\cf8 \strokec8 =\cf2 \strokec2 \{`\cf6 \strokec6 flex-1 py-3 px-4 rounded-lg font-semibold transition-all \cf2 \strokec2 $\{\
+                                    activeTab === 'swap' \
+                                        ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg' \
+                                        : 'text-gray-400 hover:text-white'\
+                                \}`\}\
+                            \cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 <\cf2 \strokec2 ArrowRightLeft size\cf8 \strokec8 =\cf2 \strokec2 \{\cf5 \strokec5 18\cf2 \strokec2 \} className\cf8 \strokec8 =\cf6 \strokec6 "inline mr-2"\cf2 \strokec2  \cf8 \strokec8 />\cf2 \strokec2 \
+                                Swap NFTs\
+                            \cf8 \strokec8 </\cf2 \strokec2 button\cf8 \strokec8 >\cf2 \strokec2 \
+                            \cf8 \strokec8 <\cf2 \strokec2 button\
+                                onClick\cf8 \strokec8 =\cf2 \strokec2 \{() \cf8 \strokec8 =>\cf2 \strokec2  \cf8 \strokec8 setActiveTab\cf2 \strokec2 (\cf6 \strokec6 'listings'\cf2 \strokec2 )\}\
+                                className\cf8 \strokec8 =\cf2 \strokec2 \{`\cf6 \strokec6 flex-1 py-3 px-4 rounded-lg font-semibold transition-all \cf2 \strokec2 $\{\
+                                    activeTab === 'listings' \
+                                        ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg' \
+                                        : 'text-gray-400 hover:text-white'\
+                                \}`\}\
+                            \cf8 \strokec8 >\cf2 \strokec2 \
+                                Browse Listings\
+                            \cf8 \strokec8 </\cf2 \strokec2 button\cf8 \strokec8 >\cf2 \strokec2 \
+                            \{walletConnected \cf8 \strokec8 &&\cf2 \strokec2  (\
+                                \cf8 \strokec8 <\cf2 \strokec2 button\
+                                    onClick\cf8 \strokec8 =\cf2 \strokec2 \{() \cf8 \strokec8 =>\cf2 \strokec2  \cf8 \strokec8 setActiveTab\cf2 \strokec2 (\cf6 \strokec6 'my-nfts'\cf2 \strokec2 )\}\
+                                    className\cf8 \strokec8 =\cf2 \strokec2 \{`\cf6 \strokec6 flex-1 py-3 px-4 rounded-lg font-semibold transition-all \cf2 \strokec2 $\{\
+                                        activeTab === 'my-nfts' \
+                                            ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg' \
+                                            : 'text-gray-400 hover:text-white'\
+                                    \}`\}\
+                                \cf8 \strokec8 >\cf2 \strokec2 \
+                                    My NFTs\
+                                \cf8 \strokec8 </\cf2 \strokec2 button\cf8 \strokec8 >\cf2 \strokec2 \
+                            )\}\
+                        \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+\
+                        \{\cf8 \strokec8 !\cf2 \strokec2 walletConnected \cf8 \strokec8 &&\cf2 \strokec2  activeTab \cf8 \strokec8 ===\cf2 \strokec2  \cf6 \strokec6 'swap'\cf2 \strokec2  \cf8 \strokec8 ?\cf2 \strokec2  (\
+                            \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "text-center py-20"\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 <\cf2 \strokec2 Wallet size\cf8 \strokec8 =\cf2 \strokec2 \{\cf5 \strokec5 64\cf2 \strokec2 \} className\cf8 \strokec8 =\cf6 \strokec6 "mx-auto mb-4 text-purple-400"\cf2 \strokec2  \cf8 \strokec8 />\cf2 \strokec2 \
+                                \cf8 \strokec8 <\cf2 \strokec2 h2 className\cf8 \strokec8 =\cf6 \strokec6 "text-2xl font-bold text-white mb-2"\cf8 \strokec8 >\cf2 \strokec2 Connect Your Wallet\cf8 \strokec8 </\cf2 \strokec2 h2\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "text-gray-400 mb-6"\cf8 \strokec8 >\cf2 \strokec2 Connect your wallet to start swapping NFTs\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 <\cf2 \strokec2 button\
+                                    onClick\cf8 \strokec8 =\cf2 \strokec2 \{connectWallet\}\
+                                    className\cf8 \strokec8 =\cf6 \strokec6 "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-lg font-semibold"\cf2 \strokec2 \
+                                \cf8 \strokec8 >\cf2 \strokec2 \
+                                    Connect Wallet\
+                                \cf8 \strokec8 </\cf2 \strokec2 button\cf8 \strokec8 >\cf2 \strokec2 \
+                            \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                        ) \cf8 \strokec8 :\cf2 \strokec2  activeTab \cf8 \strokec8 ===\cf2 \strokec2  \cf6 \strokec6 'swap'\cf2 \strokec2  \cf8 \strokec8 ?\cf2 \strokec2  (\
+                            \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "grid lg:grid-cols-2 gap-6"\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "bg-white/5 backdrop-blur rounded-xl p-6"\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 <\cf2 \strokec2 h3 className\cf8 \strokec8 =\cf6 \strokec6 "text-xl font-bold text-white mb-4"\cf8 \strokec8 >\cf2 \strokec2 Your NFTs\cf8 \strokec8 </\cf2 \strokec2 h3\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "space-y-3"\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \{myNFTs.\cf8 \strokec8 map\cf2 \strokec2 (nft \cf8 \strokec8 =>\cf2 \strokec2  (\
+                                            \cf8 \strokec8 <\cf2 \strokec2 div\
+                                                key\cf8 \strokec8 =\cf2 \strokec2 \{nft.id\}\
+                                                onClick\cf8 \strokec8 =\cf2 \strokec2 \{() \cf8 \strokec8 =>\cf2 \strokec2  \cf8 \strokec8 setSelectedNFT\cf2 \strokec2 (nft)\}\
+                                                className\cf8 \strokec8 =\cf2 \strokec2 \{`\cf6 \strokec6 bg-white/10 hover:bg-white/20 rounded-lg p-4 cursor-pointer transition-all border-2 \cf2 \strokec2 $\{\
+                                                    selectedNFT?.id === nft.id ? 'border-purple-500' : 'border-transparent'\
+                                                \}`\}\
+                                            \cf8 \strokec8 >\cf2 \strokec2 \
+                                                \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "flex items-center gap-4"\cf8 \strokec8 >\cf2 \strokec2 \
+                                                    \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "text-5xl"\cf8 \strokec8 >\cf2 \strokec2 \{nft.image\}\cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                                    \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "flex-1"\cf8 \strokec8 >\cf2 \strokec2 \
+                                                        \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "font-semibold text-white"\cf8 \strokec8 >\cf2 \strokec2 \{nft.collection\}\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                                        \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "text-sm text-gray-400"\cf8 \strokec8 >\cf2 \strokec2 \{nft.tokenId\}\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                                        \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "flex gap-2 mt-1"\cf8 \strokec8 >\cf2 \strokec2 \
+                                                            \cf8 \strokec8 <\cf2 \strokec2 span className\cf8 \strokec8 =\cf6 \strokec6 "text-xs bg-purple-500/30 text-purple-300 px-2 py-1 rounded"\cf8 \strokec8 >\cf2 \strokec2 \{nft.trait\}\cf8 \strokec8 </\cf2 \strokec2 span\cf8 \strokec8 >\cf2 \strokec2 \
+                                                            \cf8 \strokec8 <\cf2 \strokec2 span className\cf8 \strokec8 =\cf6 \strokec6 "text-xs bg-blue-500/30 text-blue-300 px-2 py-1 rounded"\cf8 \strokec8 >\cf2 \strokec2 \{nft.rarity\}\cf8 \strokec8 </\cf2 \strokec2 span\cf8 \strokec8 >\cf2 \strokec2 \
+                                                        \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                                    \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                                \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                            \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                        ))\}\
+                                    \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+\
+                                \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "bg-white/5 backdrop-blur rounded-xl p-6"\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 <\cf2 \strokec2 h3 className\cf8 \strokec8 =\cf6 \strokec6 "text-xl font-bold text-white mb-4"\cf8 \strokec8 >\cf2 \strokec2 Available \cf7 \strokec7 for\cf2 \strokec2  Swap\cf8 \strokec8 </\cf2 \strokec2 h3\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "space-y-3 max-h-96 overflow-y-auto"\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \{listings.\cf8 \strokec8 map\cf2 \strokec2 (listing \cf8 \strokec8 =>\cf2 \strokec2  (\
+                                            \cf8 \strokec8 <\cf2 \strokec2 div key\cf8 \strokec8 =\cf2 \strokec2 \{listing.id\} className\cf8 \strokec8 =\cf6 \strokec6 "bg-white/10 rounded-lg p-4"\cf8 \strokec8 >\cf2 \strokec2 \
+                                                \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "flex items-center gap-4"\cf8 \strokec8 >\cf2 \strokec2 \
+                                                    \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "text-5xl"\cf8 \strokec8 >\cf2 \strokec2 \{listing.image\}\cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                                    \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "flex-1"\cf8 \strokec8 >\cf2 \strokec2 \
+                                                        \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "font-semibold text-white"\cf8 \strokec8 >\cf2 \strokec2 \{listing.collection\}\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                                        \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "text-sm text-gray-400"\cf8 \strokec8 >\cf2 \strokec2 \{listing.tokenId\}\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                                        \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "text-xs text-gray-500 font-mono"\cf8 \strokec8 >\cf2 \strokec2 \{listing.owner\}\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                                        \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "flex gap-2 mt-1"\cf8 \strokec8 >\cf2 \strokec2 \
+                                                            \cf8 \strokec8 <\cf2 \strokec2 span className\cf8 \strokec8 =\cf6 \strokec6 "text-xs bg-purple-500/30 text-purple-300 px-2 py-1 rounded"\cf8 \strokec8 >\cf2 \strokec2 \{listing.trait\}\cf8 \strokec8 </\cf2 \strokec2 span\cf8 \strokec8 >\cf2 \strokec2 \
+                                                            \cf8 \strokec8 <\cf2 \strokec2 span className\cf8 \strokec8 =\cf6 \strokec6 "text-xs bg-blue-500/30 text-blue-300 px-2 py-1 rounded"\cf8 \strokec8 >\cf2 \strokec2 \{listing.rarity\}\cf8 \strokec8 </\cf2 \strokec2 span\cf8 \strokec8 >\cf2 \strokec2 \
+                                                        \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                                    \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                                    \cf8 \strokec8 <\cf2 \strokec2 button\
+                                                        onClick\cf8 \strokec8 =\cf2 \strokec2 \{() \cf8 \strokec8 =>\cf2 \strokec2  \cf8 \strokec8 initiateSwap\cf2 \strokec2 (listing)\}\
+                                                        className\cf8 \strokec8 =\cf6 \strokec6 "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"\cf2 \strokec2 \
+                                                    \cf8 \strokec8 >\cf2 \strokec2 \
+                                                        Propose Swap\
+                                                    \cf8 \strokec8 </\cf2 \strokec2 button\cf8 \strokec8 >\cf2 \strokec2 \
+                                                \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                            \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                        ))\}\
+                                    \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                            \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                        ) \cf8 \strokec8 :\cf2 \strokec2  activeTab \cf8 \strokec8 ===\cf2 \strokec2  \cf6 \strokec6 'listings'\cf2 \strokec2  \cf8 \strokec8 ?\cf2 \strokec2  (\
+                            \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "grid md:grid-cols-2 lg:grid-cols-3 gap-4"\cf8 \strokec8 >\cf2 \strokec2 \
+                                \{listings.\cf8 \strokec8 map\cf2 \strokec2 (listing \cf8 \strokec8 =>\cf2 \strokec2  (\
+                                    \cf8 \strokec8 <\cf2 \strokec2 div key\cf8 \strokec8 =\cf2 \strokec2 \{listing.id\} className\cf8 \strokec8 =\cf6 \strokec6 "bg-white/5 backdrop-blur rounded-xl p-4 hover:bg-white/10 transition-all"\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "text-6xl mb-3 text-center"\cf8 \strokec8 >\cf2 \strokec2 \{listing.image\}\cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 <\cf2 \strokec2 h4 className\cf8 \strokec8 =\cf6 \strokec6 "font-bold text-white"\cf8 \strokec8 >\cf2 \strokec2 \{listing.collection\}\cf8 \strokec8 </\cf2 \strokec2 h4\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "text-sm text-gray-400 mb-2"\cf8 \strokec8 >\cf2 \strokec2 \{listing.tokenId\}\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "flex flex-wrap gap-2 mb-3"\cf8 \strokec8 >\cf2 \strokec2 \
+                                            \cf8 \strokec8 <\cf2 \strokec2 span className\cf8 \strokec8 =\cf6 \strokec6 "text-xs bg-purple-500/30 text-purple-300 px-2 py-1 rounded"\cf8 \strokec8 >\cf2 \strokec2 \{listing.trait\}\cf8 \strokec8 </\cf2 \strokec2 span\cf8 \strokec8 >\cf2 \strokec2 \
+                                            \cf8 \strokec8 <\cf2 \strokec2 span className\cf8 \strokec8 =\cf6 \strokec6 "text-xs bg-blue-500/30 text-blue-300 px-2 py-1 rounded"\cf8 \strokec8 >\cf2 \strokec2 \{listing.rarity\}\cf8 \strokec8 </\cf2 \strokec2 span\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "text-xs text-gray-500 font-mono mb-3"\cf8 \strokec8 >\cf2 \strokec2 \{listing.owner\}\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 <\cf2 \strokec2 button className\cf8 \strokec8 =\cf6 \strokec6 "w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-2 rounded-lg text-sm font-semibold"\cf8 \strokec8 >\cf2 \strokec2 \
+                                            View Details\
+                                        \cf8 \strokec8 </\cf2 \strokec2 button\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                ))\}\
+                            \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                        ) \cf8 \strokec8 :\cf2 \strokec2  (\
+                            \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "grid md:grid-cols-2 lg:grid-cols-3 gap-4"\cf8 \strokec8 >\cf2 \strokec2 \
+                                \{myNFTs.\cf8 \strokec8 map\cf2 \strokec2 (nft \cf8 \strokec8 =>\cf2 \strokec2  (\
+                                    \cf8 \strokec8 <\cf2 \strokec2 div key\cf8 \strokec8 =\cf2 \strokec2 \{nft.id\} className\cf8 \strokec8 =\cf6 \strokec6 "bg-white/5 backdrop-blur rounded-xl p-4"\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "text-6xl mb-3 text-center"\cf8 \strokec8 >\cf2 \strokec2 \{nft.image\}\cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 <\cf2 \strokec2 h4 className\cf8 \strokec8 =\cf6 \strokec6 "font-bold text-white"\cf8 \strokec8 >\cf2 \strokec2 \{nft.collection\}\cf8 \strokec8 </\cf2 \strokec2 h4\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 <\cf2 \strokec2 p className\cf8 \strokec8 =\cf6 \strokec6 "text-sm text-gray-400 mb-2"\cf8 \strokec8 >\cf2 \strokec2 \{nft.tokenId\}\cf8 \strokec8 </\cf2 \strokec2 p\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 <\cf2 \strokec2 div className\cf8 \strokec8 =\cf6 \strokec6 "flex flex-wrap gap-2 mb-3"\cf8 \strokec8 >\cf2 \strokec2 \
+                                            \cf8 \strokec8 <\cf2 \strokec2 span className\cf8 \strokec8 =\cf6 \strokec6 "text-xs bg-purple-500/30 text-purple-300 px-2 py-1 rounded"\cf8 \strokec8 >\cf2 \strokec2 \{nft.trait\}\cf8 \strokec8 </\cf2 \strokec2 span\cf8 \strokec8 >\cf2 \strokec2 \
+                                            \cf8 \strokec8 <\cf2 \strokec2 span className\cf8 \strokec8 =\cf6 \strokec6 "text-xs bg-blue-500/30 text-blue-300 px-2 py-1 rounded"\cf8 \strokec8 >\cf2 \strokec2 \{nft.rarity\}\cf8 \strokec8 </\cf2 \strokec2 span\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                        \cf8 \strokec8 <\cf2 \strokec2 button className\cf8 \strokec8 =\cf6 \strokec6 "w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-2 rounded-lg text-sm font-semibold"\cf8 \strokec8 >\cf2 \strokec2 \
+                                            List \cf7 \strokec7 for\cf2 \strokec2  Swap\
+                                        \cf8 \strokec8 </\cf2 \strokec2 button\cf8 \strokec8 >\cf2 \strokec2 \
+                                    \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                                ))\}\
+                            \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                        )\}\
+                    \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+                \cf8 \strokec8 </\cf2 \strokec2 div\cf8 \strokec8 >\cf2 \strokec2 \
+            );\
+        \};\
+\
+        ReactDOM.\cf8 \strokec8 render\cf2 \strokec2 (\cf8 \strokec8 <\cf2 \strokec2 PudgySwap \cf8 \strokec8 />\cf2 \strokec2 , \cf8 \strokec8 document\cf2 \strokec2 .\cf8 \strokec8 getElementById\cf2 \strokec2 (\cf6 \strokec6 'root'\cf2 \strokec2 ));\
+    </\cf4 \strokec4 script\cf2 \strokec2 >\
+</\cf4 \strokec4 body\cf2 \strokec2 >\
+</\cf4 \strokec4 html\cf2 \strokec2 >}
