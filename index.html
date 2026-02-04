@@ -137,11 +137,20 @@ async function loadListings() {
         const lilListings = await lilRes.json();
 
         bigsGrid.innerHTML = '';
+        console.log('Pudgy Listings Response:', pudgyListings);
         for (const listing of (pudgyListings.listings || [])) {
+            console.log('Full listing object:', listing);
             const priceWei = listing.price?.current?.value;
             if (!priceWei) continue;
             const priceETH = parseFloat(priceWei) / 1e18;
-            const tokenId = listing.protocol_data?.parameters?.offer?.[0]?.identifierOrCriteria;
+
+            // Try multiple paths for token ID
+            let tokenId = listing.protocol_data?.parameters?.offer?.[0]?.identifierOrCriteria;
+            // Also check if there's a criteria object with token_ids
+            if (!tokenId && listing.criteria?.collection?.slug) {
+                tokenId = listing.criteria?.trait?.value;
+            }
+            console.log('Token ID extracted:', tokenId, 'from offer:', listing.protocol_data?.parameters?.offer?.[0]);
             if (!tokenId) continue;
 
             let imageUrl = null;
@@ -174,11 +183,19 @@ async function loadListings() {
         }
 
         lilsGrid.innerHTML = '';
+        console.log('Lil Pudgy Listings Response:', lilListings);
         for (const listing of (lilListings.listings || [])) {
+            console.log('Full lil listing object:', listing);
             const priceWei = listing.price?.current?.value;
             if (!priceWei) continue;
             const priceETH = parseFloat(priceWei) / 1e18;
-            const tokenId = listing.protocol_data?.parameters?.offer?.[0]?.identifierOrCriteria;
+
+            // Try multiple paths for token ID
+            let tokenId = listing.protocol_data?.parameters?.offer?.[0]?.identifierOrCriteria;
+            if (!tokenId && listing.criteria?.collection?.slug) {
+                tokenId = listing.criteria?.trait?.value;
+            }
+            console.log('Lil Token ID extracted:', tokenId);
             if (!tokenId) continue;
 
             let imageUrl = null;
