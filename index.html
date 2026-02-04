@@ -17,261 +17,166 @@
                     <p class="text-xs text-purple-300">Peer-to-peer NFT Trading</p>
                 </div>
             </div>
-            
-            <button onclick="connectWallet()" class="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg font-semibold">
-                Connect Wallet
-            </button>
+            <button onclick="connectWallet()" class="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg font-semibold">Connect Wallet</button>
         </div>
     </header>
 
     <div class="max-w-7xl mx-auto px-6 py-8">
-        
         <div class="grid md:grid-cols-2 gap-4 mb-8">
             <div class="bg-gradient-to-br from-blue-400 to-cyan-400 rounded-xl p-4 shadow-lg">
                 <div class="bg-white/90 backdrop-blur rounded-lg p-4">
                     <h3 class="font-bold text-gray-800 mb-2">Pudgy Penguins</h3>
-                    <div class="flex items-baseline gap-2 mb-1">
-                        <span class="text-2xl font-bold text-gray-900" id="pudgy-floor">4.13 ETH</span>
-                    </div>
+                    <span class="text-2xl font-bold text-gray-900" id="pudgy-floor">4.13 ETH</span>
                     <p class="text-sm text-gray-600" id="pudgy-usd">$8,816.06</p>
                     <div class="flex gap-4 mt-3 text-xs">
-                        <div>
-                            <p class="text-gray-500">24h Vol</p>
-                            <p class="font-semibold text-gray-800">102.23 ETH</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-500">24h Sales</p>
-                            <p class="font-semibold text-gray-800">28</p>
-                        </div>
+                        <div><p class="text-gray-500">24h Vol</p><p class="font-semibold text-gray-800">102.23 ETH</p></div>
+                        <div><p class="text-gray-500">24h Sales</p><p class="font-semibold text-gray-800">28</p></div>
                     </div>
                 </div>
             </div>
-
             <div class="bg-gradient-to-br from-purple-400 to-pink-400 rounded-xl p-4 shadow-lg">
                 <div class="bg-white/90 backdrop-blur rounded-lg p-4">
                     <h3 class="font-bold text-gray-800 mb-2">Lil Pudgys</h3>
-                    <div class="flex items-baseline gap-2 mb-1">
-                        <span class="text-2xl font-bold text-gray-900" id="lil-floor">0.47 ETH</span>
-                    </div>
+                    <span class="text-2xl font-bold text-gray-900" id="lil-floor">0.47 ETH</span>
                     <p class="text-sm text-gray-600" id="lil-usd">$1,003.28</p>
                     <div class="flex gap-4 mt-3 text-xs">
-                        <div>
-                            <p class="text-gray-500">24h Vol</p>
-                            <p class="font-semibold text-gray-800">84.46 ETH</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-500">24h Sales</p>
-                            <p class="font-semibold text-gray-800">42</p>
-                        </div>
+                        <div><p class="text-gray-500">24h Vol</p><p class="font-semibold text-gray-800">84.46 ETH</p></div>
+                        <div><p class="text-gray-500">24h Sales</p><p class="font-semibold text-gray-800">42</p></div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="flex gap-2 mb-6 bg-white/5 backdrop-blur rounded-lg p-1">
-            <button onclick="showTab('swap')" id="tab-swap" class="flex-1 py-3 px-4 rounded-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 text-white">
-                Swap NFTs
-            </button>
-            <button onclick="showTab('listings')" id="tab-listings" class="flex-1 py-3 px-4 rounded-lg font-semibold text-gray-400 hover:text-white">
-                Browse Listings
-            </button>
+            <button onclick="showTab('swap')" id="tab-swap" class="flex-1 py-3 px-4 rounded-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 text-white">Swap NFTs</button>
+            <button onclick="showTab('listings')" id="tab-listings" class="flex-1 py-3 px-4 rounded-lg font-semibold text-gray-400 hover:text-white">Browse Listings</button>
         </div>
 
         <div id="content-swap" class="text-center py-20 text-white">
             <h2 class="text-2xl font-bold mb-2">Connect Your Wallet</h2>
             <p class="text-gray-400 mb-6">Connect your wallet to start swapping NFTs</p>
-            <button onclick="connectWallet()" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-lg font-semibold">
-                Connect Wallet
-            </button>
+            <button onclick="connectWallet()" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-lg font-semibold">Connect Wallet</button>
         </div>
 
         <div id="content-listings" style="display: none;">
-            <div id="listings-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <p class="col-span-full text-center text-gray-400">Loading listings...</p>
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-white mb-4">🐧 Bigs</h2>
+                <div id="bigs-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold text-white mb-4">🐧 Lils</h2>
+                <div id="lils-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
             </div>
         </div>
     </div>
 
     <script>
-        const API_KEY = '1ba82dceecf94ec0bb8b966f09eef70a';
+const API_KEY = '1ba82dceecf94ec0bb8b966f09eef70a';
 
-        function showTab(tab) {
-            if (tab === 'swap') {
-                document.getElementById('content-swap').style.display = 'block';
-                document.getElementById('content-listings').style.display = 'none';
-                document.getElementById('tab-swap').className = 'flex-1 py-3 px-4 rounded-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 text-white';
-                document.getElementById('tab-listings').className = 'flex-1 py-3 px-4 rounded-lg font-semibold text-gray-400 hover:text-white';
-            } else if (tab === 'listings') {
-                document.getElementById('content-swap').style.display = 'none';
-                document.getElementById('content-listings').style.display = 'block';
-                document.getElementById('tab-swap').className = 'flex-1 py-3 px-4 rounded-lg font-semibold text-gray-400 hover:text-white';
-                document.getElementById('tab-listings').className = 'flex-1 py-3 px-4 rounded-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 text-white';
-                fetchListings();
-            }
+function showTab(tab) {
+    if (tab === 'swap') {
+        document.getElementById('content-swap').style.display = 'block';
+        document.getElementById('content-listings').style.display = 'none';
+        document.getElementById('tab-swap').className = 'flex-1 py-3 px-4 rounded-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 text-white';
+        document.getElementById('tab-listings').className = 'flex-1 py-3 px-4 rounded-lg font-semibold text-gray-400 hover:text-white';
+    } else {
+        document.getElementById('content-swap').style.display = 'none';
+        document.getElementById('content-listings').style.display = 'block';
+        document.getElementById('tab-swap').className = 'flex-1 py-3 px-4 rounded-lg font-semibold text-gray-400 hover:text-white';
+        document.getElementById('tab-listings').className = 'flex-1 py-3 px-4 rounded-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 text-white';
+        loadListings();
+    }
+}
+
+function connectWallet() { alert('Wallet connection coming soon!'); }
+
+async function fetchFloorPrices() {
+    try {
+        const ethRes = await fetch('https://api.diadata.org/v1/assetQuotation/Ethereum/0x0000000000000000000000000000000000000000');
+        const ethData = await ethRes.json();
+        const ethPrice = ethData.Price;
+        
+        const pudgyRes = await fetch('https://api.opensea.io/api/v2/collections/pudgypenguins/stats', {headers: {'X-API-KEY': API_KEY}});
+        const pudgyData = await pudgyRes.json();
+        const pudgyFloor = parseFloat(pudgyData.total?.floor_price || 0);
+        if (pudgyFloor > 0) {
+            document.getElementById('pudgy-floor').textContent = pudgyFloor.toFixed(2) + ' ETH';
+            document.getElementById('pudgy-usd').textContent = '$' + (pudgyFloor * ethPrice).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
-
-        function connectWallet() {
-            alert('Wallet connection coming soon!');
+        
+        const lilRes = await fetch('https://api.opensea.io/api/v2/collections/lilpudgys/stats', {headers: {'X-API-KEY': API_KEY}});
+        const lilData = await lilRes.json();
+        const lilFloor = parseFloat(lilData.total?.floor_price || 0);
+        if (lilFloor > 0) {
+            document.getElementById('lil-floor').textContent = lilFloor.toFixed(2) + ' ETH';
+            document.getElementById('lil-usd').textContent = '$' + (lilFloor * ethPrice).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
+    } catch (err) { console.error('Price fetch error:', err); }
+}
 
-        async function fetchFloorPrices() {
-            try {
-                const ethPriceRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
-                const ethPriceData = await ethPriceRes.json();
-                const ethPrice = ethPriceData.ethereum.usd;
-                
-                const pudgyRes = await fetch('https://api.opensea.io/api/v2/collections/pudgypenguins/stats', {
-                    headers: { 'X-API-KEY': API_KEY }
-                });
-                const pudgyData = await pudgyRes.json();
-                
-                const lilRes = await fetch('https://api.opensea.io/api/v2/collections/lilpudgys/stats', {
-                    headers: { 'X-API-KEY': API_KEY }
-                });
-                const lilData = await lilRes.json();
-                
-                const pudgyFloor = parseFloat(pudgyData.total?.floor_price || 0);
-                if (pudgyFloor > 0) {
-                    document.getElementById('pudgy-floor').textContent = pudgyFloor.toFixed(2) + ' ETH';
-                    document.getElementById('pudgy-usd').textContent = '$' + (pudgyFloor * ethPrice).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                }
-                
-                const lilFloor = parseFloat(lilData.total?.floor_price || 0);
-                if (lilFloor > 0) {
-                    document.getElementById('lil-floor').textContent = lilFloor.toFixed(2) + ' ETH';
-                    document.getElementById('lil-usd').textContent = '$' + (lilFloor * ethPrice).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                }
-                
-                console.log('Prices updated with live ETH price:', ethPrice);
-            } catch (err) {
-                console.error('API Error:', err);
-            }
-        }
+async function loadListings() {
+    const bigsGrid = document.getElementById('bigs-grid');
+    const lilsGrid = document.getElementById('lils-grid');
+    
+    let ethPrice = 2134.64;
+    try {
+        const ethRes = await fetch('https://api.diadata.org/v1/assetQuotation/Ethereum/0x0000000000000000000000000000000000000000');
+        const ethData = await ethRes.json();
+        ethPrice = ethData.Price;
+    } catch (e) {}
+    
+    const mockBigs = [
+        {name: 'Pudgy #1234', price: 4.13, id: '1234'},
+        {name: 'Pudgy #5678', price: 4.15, id: '5678'},
+        {name: 'Pudgy #9012', price: 4.18, id: '9012'},
+        {name: 'Pudgy #3456', price: 4.20, id: '3456'},
+        {name: 'Pudgy #7891', price: 4.22, id: '7891'},
+        {name: 'Pudgy #2345', price: 4.25, id: '2345'}
+    ];
+    
+    const mockLils = [
+        {name: 'Lil Pudgy #2468', price: 0.47, id: '2468'},
+        {name: 'Lil Pudgy #1357', price: 0.48, id: '1357'},
+        {name: 'Lil Pudgy #7890', price: 0.49, id: '7890'},
+        {name: 'Lil Pudgy #4567', price: 0.50, id: '4567'},
+        {name: 'Lil Pudgy #8901', price: 0.51, id: '8901'},
+        {name: 'Lil Pudgy #3456', price: 0.52, id: '3456'}
+    ];
+    
+    bigsGrid.innerHTML = '';
+    mockBigs.forEach(nft => {
+        const div = document.createElement('div');
+        div.className = 'bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all';
+        div.innerHTML = `
+            <div class="aspect-square mb-3 rounded-lg overflow-hidden bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center"><div class="text-8xl">🐧</div></div>
+            <h4 class="font-bold text-white">${nft.name}</h4>
+            <div class="flex items-baseline gap-2 my-2">
+                <span class="text-lg font-bold text-green-400">${nft.price.toFixed(2)} ETH</span>
+                <span class="text-sm text-gray-400">$${(nft.price * ethPrice).toFixed(2)}</span>
+            </div>
+            <button onclick="window.open('https://opensea.io/assets/ethereum/0xBd3531dA5CF5857e7CfAA92426877b022e612cf8/${nft.id}', '_blank')" class="w-full mt-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-2 rounded-lg text-sm font-semibold">Buy on OpenSea</button>
+        `;
+        bigsGrid.appendChild(div);
+    });
+    
+    lilsGrid.innerHTML = '';
+    mockLils.forEach(nft => {
+        const div = document.createElement('div');
+        div.className = 'bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all';
+        div.innerHTML = `
+            <div class="aspect-square mb-3 rounded-lg overflow-hidden bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center"><div class="text-8xl">🐧</div></div>
+            <h4 class="font-bold text-white">${nft.name}</h4>
+            <div class="flex items-baseline gap-2 my-2">
+                <span class="text-lg font-bold text-green-400">${nft.price.toFixed(2)} ETH</span>
+                <span class="text-sm text-gray-400">$${(nft.price * ethPrice).toFixed(2)}</span>
+            </div>
+            <button onclick="window.open('https://opensea.io/assets/ethereum/0x524cAB2ec69124574082676e6F654a18df49A048/${nft.id}', '_blank')" class="w-full mt-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-2 rounded-lg text-sm font-semibold">Buy on OpenSea</button>
+        `;
+        lilsGrid.appendChild(div);
+    });
+}
 
-        async function fetchListings() {
-            const grid = document.getElementById('listings-grid');
-            grid.innerHTML = '<p class="col-span-full text-center text-gray-400">Loading lowest priced listings...</p>';
-            
-            try {
-                // Fetch listings sorted by price (lowest first)
-                const pudgyRes = await fetch('https://api.opensea.io/api/v2/listings/collection/pudgypenguins/all?limit=3', {
-                    headers: { 'X-API-KEY': API_KEY }
-                });
-                
-                if (!pudgyRes.ok) {
-                    throw new Error('OpenSea API request failed');
-                }
-                
-                const pudgyListings = await pudgyRes.json();
-                
-                const lilRes = await fetch('https://api.opensea.io/api/v2/listings/collection/lilpudgys/all?limit=3', {
-                    headers: { 'X-API-KEY': API_KEY }
-                });
-                const lilListings = await lilRes.json();
-                
-                grid.innerHTML = '';
-                
-                const allListings = [...(pudgyListings.listings || []), ...(lilListings.listings || [])];
-                
-                // Get current ETH price for USD conversion
-                const ethPriceRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
-                const ethPriceData = await ethPriceRes.json();
-                const ethPrice = ethPriceData.ethereum.usd;
-                
-                allListings.forEach(listing => {
-                    const priceETH = parseFloat(listing.price?.current?.value || 0) / 1e18; // Convert from Wei
-                    const priceUSD = priceETH * ethPrice;
-                    const nft = listing.protocol_data?.parameters?.offer?.[0] || {};
-                    
-                    const div = document.createElement('div');
-                    div.className = 'bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all';
-                    div.innerHTML = `
-                        <div class="aspect-square mb-3 rounded-lg overflow-hidden bg-gray-800">
-                            ${nft.image_url ? `<img src="${nft.image_url}" alt="NFT" class="w-full h-full object-cover">` : '<div class="text-6xl flex items-center justify-center h-full">🐧</div>'}
-                        </div>
-                        <h4 class="font-bold text-white">${listing.protocol_data?.parameters?.offer?.[0]?.token || 'Pudgy NFT'}</h4>
-                        <div class="flex items-baseline gap-2 my-2">
-                            <span class="text-lg font-bold text-green-400">${priceETH.toFixed(2)} ETH</span>
-                            <span class="text-sm text-gray-400">${priceUSD.toFixed(2)}</span>
-                        </div>
-                        <button onclick="window.open('${listing.permalink || 'https://opensea.io'}', '_blank')" class="w-full mt-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-2 rounded-lg text-sm font-semibold">
-                            Buy on OpenSea
-                        </button>
-                    `;
-                    grid.appendChild(div);
-                });
-                
-                console.log('Lowest priced listings loaded successfully');
-            } catch (err) {
-                console.error('Listings Error:', err);
-                // Show mock data as fallback with prices
-                grid.innerHTML = '';
-                
-                const mockListings = [
-                    { name: 'Pudgy Penguin #1234', collection: 'Pudgy Penguins', price: 4.13, contract: '0xBd3531dA5CF5857e7CfAA92426877b022e612cf8', id: '1234' },
-                    { name: 'Pudgy Penguin #5678', collection: 'Pudgy Penguins', price: 4.15, contract: '0xBd3531dA5CF5857e7CfAA92426877b022e612cf8', id: '5678' },
-                    { name: 'Pudgy Penguin #9012', collection: 'Pudgy Penguins', price: 4.18, contract: '0xBd3531dA5CF5857e7CfAA92426877b022e612cf8', id: '9012' },
-                    { name: 'Lil Pudgy #2468', collection: 'Lil Pudgys', price: 0.47, contract: '0x524cAB2ec69124574082676e6F654a18df49A048', id: '2468' },
-                    { name: 'Lil Pudgy #1357', collection: 'Lil Pudgys', price: 0.48, contract: '0x524cAB2ec69124574082676e6F654a18df49A048', id: '1357' },
-                    { name: 'Lil Pudgy #7890', collection: 'Lil Pudgys', price: 0.49, contract: '0x524cAB2ec69124574082676e6F654a18df49A048', id: '7890' }
-                ];
-                
-                // Get ETH price for mock data
-                fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd')
-                    .then(res => res.json())
-                    .then(data => {
-                        const ethPrice = data.ethereum.usd;
-                        
-                        mockListings.forEach(nft => {
-                            const priceUSD = nft.price * ethPrice;
-                            const div = document.createElement('div');
-                            div.className = 'bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all';
-                            div.innerHTML = `
-                                <div class="aspect-square mb-3 rounded-lg overflow-hidden bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
-                                    <div class="text-8xl">🐧</div>
-                                </div>
-                                <h4 class="font-bold text-white">${nft.name}</h4>
-                                <p class="text-xs text-gray-400 mb-2">${nft.collection}</p>
-                                <div class="flex items-baseline gap-2 my-2">
-                                    <span class="text-lg font-bold text-green-400">${nft.price.toFixed(2)} ETH</span>
-                                    <span class="text-sm text-gray-400">${priceUSD.toFixed(2)}</span>
-                                </div>
-                                <button onclick="window.open('https://opensea.io/assets/ethereum/${nft.contract}/${nft.id}', '_blank')" class="w-full mt-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-2 rounded-lg text-sm font-semibold">
-                                    Buy on OpenSea
-                                </button>
-                            `;
-                            grid.appendChild(div);
-                        });
-                    })
-                    .catch(() => {
-                        // If ETH price fails, use fallback
-                        mockListings.forEach(nft => {
-                            const priceUSD = nft.price * 2134.64;
-                            const div = document.createElement('div');
-                            div.className = 'bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all';
-                            div.innerHTML = `
-                                <div class="aspect-square mb-3 rounded-lg overflow-hidden bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
-                                    <div class="text-8xl">🐧</div>
-                                </div>
-                                <h4 class="font-bold text-white">${nft.name}</h4>
-                                <p class="text-xs text-gray-400 mb-2">${nft.collection}</p>
-                                <div class="flex items-baseline gap-2 my-2">
-                                    <span class="text-lg font-bold text-green-400">${nft.price.toFixed(2)} ETH</span>
-                                    <span class="text-sm text-gray-400">${priceUSD.toFixed(2)}</span>
-                                </div>
-                                <button onclick="window.open('https://opensea.io/assets/ethereum/${nft.contract}/${nft.id}', '_blank')" class="w-full mt-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-2 rounded-lg text-sm font-semibold">
-                                    Buy on OpenSea
-                                </button>
-                            `;
-                            grid.appendChild(div);
-                        });
-                    });
-                
-                console.log('Showing mock lowest priced listings (API unavailable)');
-            }
-        }
-
-        fetchFloorPrices();
+fetchFloorPrices();
     </script>
 </body>
 </html>
