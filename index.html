@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PudgySwap - NFT Trading Platform</title>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Lucide icons as SVG components
+        const Wallet = ({ size = 24, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+                <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
+                <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
+                <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/>
+            </svg>
+        );
+
+        const ArrowRightLeft = ({ size = 24, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+                <path d="M8 3 4 7l4 4"/>
+                <path d="M4 7h16"/>
+                <path d="m16 21 4-4-4-4"/>
+                <path d="M20 17H4"/>
+            </svg>
+        );
+
+        const PudgySwap = () => {
+            const [walletConnected, setWalletConnected] = useState(false);
+            const [walletAddress, setWalletAddress] = useState('');
+            const [activeTab, setActiveTab] = useState('swap');
+            const [pudgyData, setPudgyData] = useState(null);
+            const [lilPudgyData, setLilPudgyData] = useState(null);
+            const [listings, setListings] = useState([]);
+            const [myNFTs, setMyNFTs] = useState([]);
+            const [selectedNFT, setSelectedNFT] = useState(null);
+
+            const mockListings = [
+                { id: 1, tokenId: '#1234', collection: 'Pudgy Penguins', owner: '0x1234...5678', image: '🐧', trait: 'Blue Scarf', rarity: 'Rare' },
+                { id: 2, tokenId: '#5678', collection: 'Pudgy Penguins', owner: '0x8765...4321', image: '🐧', trait: 'Red Hat', rarity: 'Common' },
+                { id: 3, tokenId: '#9012', collection: 'Lil Pudgys', owner: '0x9876...1234', image: '🐧', trait: 'Yellow Bow', rarity: 'Epic' },
+                { id: 4, tokenId: '#3456', collection: 'Lil Pudgys', owner: '0x4567...8901', image: '🐧', trait: 'Green Glasses', rarity: 'Rare' },
+                { id: 5, tokenId: '#7890', collection: 'Pudgy Penguins', owner: '0x2345...6789', image: '🐧', trait: 'Pink Bow', rarity: 'Epic' },
+                { id: 6, tokenId: '#2468', collection: 'Lil Pudgys', owner: '0x6789...0123', image: '🐧', trait: 'Blue Hat', rarity: 'Common' },
+            ];
+
+            const mockMyNFTs = [
+                { id: 1, tokenId: '#2468', collection: 'Pudgy Penguins', image: '🐧', trait: 'Purple Scarf', rarity: 'Epic' },
+                { id: 2, tokenId: '#1357', collection: 'Lil Pudgys', image: '🐧', trait: 'Orange Hat', rarity: 'Rare' },
+            ];
+
+            useEffect(() => {
+                setListings(mockListings);
+                fetchMarketData();
+            }, []);
+
+            const fetchMarketData = async () => {
+                setPudgyData({
+                    floorPrice: 8.45,
+                    floorPriceUSD: 29575,
+                    volume24h: 234.5,
+                    sales24h: 28,
+                    priceChange24h: 2.3
+                });
+                
+                setLilPudgyData({
+                    floorPrice: 2.15,
+                    floorPriceUSD: 7525,
+                    volume24h: 89.2,
+                    sales24h: 42,
+                    priceChange24h: -1.5
+                });
+            };
+
+            const connectWallet = async () => {
+                if (typeof window.ethereum !== 'undefined') {
+                    try {
+                        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                        setWalletAddress(accounts[0]);
+                        setWalletConnected(true);
+                        setMyNFTs(mockMyNFTs);
+                    } catch (error) {
+                        console.error('Failed to connect wallet:', error);
+                        const mockAddress = '0x' + Math.random().toString(16).substr(2, 40);
+                        setWalletAddress(mockAddress);
+                        setWalletConnected(true);
+                        setMyNFTs(mockMyNFTs);
+                    }
+                } else {
+                    const mockAddress = '0x' + Math.random().toString(16).substr(2, 40);
+                    setWalletAddress(mockAddress);
+                    setWalletConnected(true);
+                    setMyNFTs(mockMyNFTs);
+                }
+            };
+
+            const disconnectWallet = () => {
+                setWalletConnected(false);
+                setWalletAddress('');
+                setMyNFTs([]);
+                setSelectedNFT(null);
+            };
+
+            const initiateSwap = (listingNFT) => {
+                if (!selectedNFT) {
+                    alert('Please select one of your NFTs to offer in the swap');
+                    return;
+                }
+                alert(`Swap initiated!\nYour ${selectedNFT.collection} ${selectedNFT.tokenId}\n↔\nTheir ${listingNFT.collection} ${listingNFT.tokenId}\n\nIn production, this would create a swap proposal on-chain.`);
+            };
+
+            const StatCard = ({ data, name, gradient }) => {
+                if (!data) return null;
+                const isPositive = data.priceChange24h >= 0;
+                
+                return (
+                    <div className={`bg-gradient-to-br ${gradient} rounded-xl p-4 shadow-lg`}>
+                        <div className="bg-white/90 backdrop-blur rounded-lg p-4">
+                            <h3 className="font-bold text-gray-800 mb-2">{name}</h3>
+                            <div className="flex items-baseline gap-2 mb-1">
+                                <span className="text-2xl font-bold text-gray-900">{data.floorPrice} ETH</span>
+                                <span className={`text-sm font-semibold ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
+                                    {isPositive ? '+' : ''}{data.priceChange24h}%
+                                </span>
+                            </div>
+                            <p className="text-sm text-gray-600">${data.floorPriceUSD.toLocaleString()}</p>
+                            <div className="flex gap-4 mt-3 text-xs">
+                                <div>
+                                    <p className="text-gray-500">24h Vol</p>
+                                    <p className="font-semibold text-gray-800">{data.volume24h} ETH</p>
+                                </div>
+                                <div>
+                                    <p className="text-gray-500">24h Sales</p>
+                                    <p className="font-semibold text-gray-800">{data.sales24h}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+                    <header className="border-b border-white/10 bg-black/20 backdrop-blur-lg">
+                        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <div className="text-4xl">🐧</div>
+                                <div>
+                                    <h1 className="text-2xl font-bold text-white">PudgySwap</h1>
+                                    <p className="text-xs text-purple-300">Peer-to-peer NFT Trading</p>
+                                </div>
+                            </div>
+                            
+                            {!walletConnected ? (
+                                <button
+                                    onClick={connectWallet}
+                                    className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl"
+                                >
+                                    <Wallet size={20} />
+                                    Connect Wallet
+                                </button>
+                            ) : (
+                                <div className="flex items-center gap-3">
+                                    <div className="bg-white/10 backdrop-blur px-4 py-2 rounded-lg">
+                                        <p className="text-xs text-purple-300">Connected</p>
+                                        <p className="text-sm text-white font-mono">{walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}</p>
+                                    </div>
+                                    <button
+                                        onClick={disconnectWallet}
+                                        className="text-red-400 hover:text-red-300 text-sm"
+                                    >
+                                        Disconnect
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </header>
+
+                    <div className="max-w-7xl mx-auto px-6 py-8">
+                        <div className="grid md:grid-cols-2 gap-4 mb-8">
+                            <StatCard data={pudgyData} name="Pudgy Penguins" gradient="from-blue-400 to-cyan-400" />
+                            <StatCard data={lilPudgyData} name="Lil Pudgys" gradient="from-purple-400 to-pink-400" />
+                        </div>
+
+                        <div className="flex gap-2 mb-6 bg-white/5 backdrop-blur rounded-lg p-1">
+                            <button
+                                onClick={() => setActiveTab('swap')}
+                                className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all ${
+                                    activeTab === 'swap' 
+                                        ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg' 
+                                        : 'text-gray-400 hover:text-white'
+                                }`}
+                            >
+                                <ArrowRightLeft size={18} className="inline mr-2" />
+                                Swap NFTs
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('listings')}
+                                className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all ${
+                                    activeTab === 'listings' 
+                                        ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg' 
+                                        : 'text-gray-400 hover:text-white'
+                                }`}
+                            >
+                                Browse Listings
+                            </button>
+                            {walletConnected && (
+                                <button
+                                    onClick={() => setActiveTab('my-nfts')}
+                                    className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all ${
+                                        activeTab === 'my-nfts' 
+                                            ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg' 
+                                            : 'text-gray-400 hover:text-white'
+                                    }`}
+                                >
+                                    My NFTs
+                                </button>
+                            )}
+                        </div>
+
+                        {!walletConnected && activeTab === 'swap' ? (
+                            <div className="text-center py-20">
+                                <Wallet size={64} className="mx-auto mb-4 text-purple-400" />
+                                <h2 className="text-2xl font-bold text-white mb-2">Connect Your Wallet</h2>
+                                <p className="text-gray-400 mb-6">Connect your wallet to start swapping NFTs</p>
+                                <button
+                                    onClick={connectWallet}
+                                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-lg font-semibold"
+                                >
+                                    Connect Wallet
+                                </button>
+                            </div>
+                        ) : activeTab === 'swap' ? (
+                            <div className="grid lg:grid-cols-2 gap-6">
+                                <div className="bg-white/5 backdrop-blur rounded-xl p-6">
+                                    <h3 className="text-xl font-bold text-white mb-4">Your NFTs</h3>
+                                    <div className="space-y-3">
+                                        {myNFTs.map(nft => (
+                                            <div
+                                                key={nft.id}
+                                                onClick={() => setSelectedNFT(nft)}
+                                                className={`bg-white/10 hover:bg-white/20 rounded-lg p-4 cursor-pointer transition-all border-2 ${
+                                                    selectedNFT?.id === nft.id ? 'border-purple-500' : 'border-transparent'
+                                                }`}
+                                            >
+                                                <div className="flex items-center gap-4">
+                                                    <div className="text-5xl">{nft.image}</div>
+                                                    <div className="flex-1">
+                                                        <p className="font-semibold text-white">{nft.collection}</p>
+                                                        <p className="text-sm text-gray-400">{nft.tokenId}</p>
+                                                        <div className="flex gap-2 mt-1">
+                                                            <span className="text-xs bg-purple-500/30 text-purple-300 px-2 py-1 rounded">{nft.trait}</span>
+                                                            <span className="text-xs bg-blue-500/30 text-blue-300 px-2 py-1 rounded">{nft.rarity}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="bg-white/5 backdrop-blur rounded-xl p-6">
+                                    <h3 className="text-xl font-bold text-white mb-4">Available for Swap</h3>
+                                    <div className="space-y-3 max-h-96 overflow-y-auto">
+                                        {listings.map(listing => (
+                                            <div key={listing.id} className="bg-white/10 rounded-lg p-4">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="text-5xl">{listing.image}</div>
+                                                    <div className="flex-1">
+                                                        <p className="font-semibold text-white">{listing.collection}</p>
+                                                        <p className="text-sm text-gray-400">{listing.tokenId}</p>
+                                                        <p className="text-xs text-gray-500 font-mono">{listing.owner}</p>
+                                                        <div className="flex gap-2 mt-1">
+                                                            <span className="text-xs bg-purple-500/30 text-purple-300 px-2 py-1 rounded">{listing.trait}</span>
+                                                            <span className="text-xs bg-blue-500/30 text-blue-300 px-2 py-1 rounded">{listing.rarity}</span>
+                                                        </div>
+                                                    </div>
+                                                    <button
+                                                        onClick={() => initiateSwap(listing)}
+                                                        className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
+                                                    >
+                                                        Propose Swap
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        ) : activeTab === 'listings' ? (
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {listings.map(listing => (
+                                    <div key={listing.id} className="bg-white/5 backdrop-blur rounded-xl p-4 hover:bg-white/10 transition-all">
+                                        <div className="text-6xl mb-3 text-center">{listing.image}</div>
+                                        <h4 className="font-bold text-white">{listing.collection}</h4>
+                                        <p className="text-sm text-gray-400 mb-2">{listing.tokenId}</p>
+                                        <div className="flex flex-wrap gap-2 mb-3">
+                                            <span className="text-xs bg-purple-500/30 text-purple-300 px-2 py-1 rounded">{listing.trait}</span>
+                                            <span className="text-xs bg-blue-500/30 text-blue-300 px-2 py-1 rounded">{listing.rarity}</span>
+                                        </div>
+                                        <p className="text-xs text-gray-500 font-mono mb-3">{listing.owner}</p>
+                                        <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-2 rounded-lg text-sm font-semibold">
+                                            View Details
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {myNFTs.map(nft => (
+                                    <div key={nft.id} className="bg-white/5 backdrop-blur rounded-xl p-4">
+                                        <div className="text-6xl mb-3 text-center">{nft.image}</div>
+                                        <h4 className="font-bold text-white">{nft.collection}</h4>
+                                        <p className="text-sm text-gray-400 mb-2">{nft.tokenId}</p>
+                                        <div className="flex flex-wrap gap-2 mb-3">
+                                            <span className="text-xs bg-purple-500/30 text-purple-300 px-2 py-1 rounded">{nft.trait}</span>
+                                            <span className="text-xs bg-blue-500/30 text-blue-300 px-2 py-1 rounded">{nft.rarity}</span>
+                                        </div>
+                                        <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-2 rounded-lg text-sm font-semibold">
+                                            List for Swap
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<PudgySwap />, document.getElementById('root'));
+    </script>
+</body>
+</html>
