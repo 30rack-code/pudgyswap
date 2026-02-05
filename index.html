@@ -126,33 +126,33 @@ async function loadListings() {
         const ethData = await ethRes.json();
         const ethPrice = ethData.Price;
 
-        const pudgyRes = await fetch('https://api.opensea.io/api/v2/listings/collection/pudgypenguins/all?limit=6', {
+        // Fetch listings with best listings endpoint that includes asset info
+        const pudgyRes = await fetch('https://api.opensea.io/api/v2/listings/collection/pudgypenguins/best?limit=6', {
             headers: {'X-API-KEY': API_KEY}
         });
         const pudgyListings = await pudgyRes.json();
 
-        const lilRes = await fetch('https://api.opensea.io/api/v2/listings/collection/lilpudgys/all?limit=6', {
+        const lilRes = await fetch('https://api.opensea.io/api/v2/listings/collection/lilpudgys/best?limit=6', {
             headers: {'X-API-KEY': API_KEY}
         });
         const lilListings = await lilRes.json();
 
+        console.log('Pudgy Best Listings Response:', pudgyListings);
+        console.log('Lil Best Listings Response:', lilListings);
+
         bigsGrid.innerHTML = '';
-        console.log('Pudgy Listings Response:', pudgyListings);
         for (const listing of (pudgyListings.listings || [])) {
-            console.log('Full listing object:', listing);
+            console.log('Pudgy listing:', listing);
             const priceWei = listing.price?.current?.value;
             if (!priceWei) continue;
             const priceETH = parseFloat(priceWei) / 1e18;
 
-            // Try multiple paths for token ID
-            let tokenId = listing.protocol_data?.parameters?.offer?.[0]?.identifierOrCriteria;
-            // Also check if there's a criteria object with token_ids
-            if (!tokenId && listing.criteria?.collection?.slug) {
-                tokenId = listing.criteria?.trait?.value;
-            }
-            console.log('Token ID extracted:', tokenId, 'from offer:', listing.protocol_data?.parameters?.offer?.[0]);
-            if (!tokenId) continue;
+            // Get token ID from protocol_data - the identifier field
+            const tokenId = listing.protocol_data?.parameters?.offer?.[0]?.identifierOrCriteria;
+            console.log('Pudgy Token ID:', tokenId);
+            if (!tokenId || tokenId === '0') continue;
 
+            // Fetch NFT metadata for image
             let imageUrl = null;
             try {
                 const nftRes = await fetch(`https://api.opensea.io/api/v2/chain/ethereum/contract/0xBd3531dA5CF5857e7CfAA92426877b022e612cf8/nfts/${tokenId}`, {
@@ -160,7 +160,10 @@ async function loadListings() {
                 });
                 const nftData = await nftRes.json();
                 imageUrl = nftData.nft?.image_url;
-            } catch (e) {}
+                console.log('NFT data for', tokenId, ':', nftData);
+            } catch (e) {
+                console.error('Failed to fetch NFT image:', e);
+            }
 
             const div = document.createElement('div');
             div.className = 'bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all';
@@ -183,20 +186,15 @@ async function loadListings() {
         }
 
         lilsGrid.innerHTML = '';
-        console.log('Lil Pudgy Listings Response:', lilListings);
         for (const listing of (lilListings.listings || [])) {
-            console.log('Full lil listing object:', listing);
+            console.log('Lil listing:', listing);
             const priceWei = listing.price?.current?.value;
             if (!priceWei) continue;
             const priceETH = parseFloat(priceWei) / 1e18;
 
-            // Try multiple paths for token ID
-            let tokenId = listing.protocol_data?.parameters?.offer?.[0]?.identifierOrCriteria;
-            if (!tokenId && listing.criteria?.collection?.slug) {
-                tokenId = listing.criteria?.trait?.value;
-            }
-            console.log('Lil Token ID extracted:', tokenId);
-            if (!tokenId) continue;
+            const tokenId = listing.protocol_data?.parameters?.offer?.[0]?.identifierOrCriteria;
+            console.log('Lil Token ID:', tokenId);
+            if (!tokenId || tokenId === '0') continue;
 
             let imageUrl = null;
             try {
@@ -205,7 +203,9 @@ async function loadListings() {
                 });
                 const nftData = await nftRes.json();
                 imageUrl = nftData.nft?.image_url;
-            } catch (e) {}
+            } catch (e) {
+                console.error('Failed to fetch Lil NFT image:', e);
+            }
 
             const div = document.createElement('div');
             div.className = 'bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all';
